@@ -5,7 +5,10 @@
 [](https://pytorch.org/get-started/locally/)
 [](https://opensource.org/licenses/MIT)
 
-**Vein Hunter** is an attention-guided deep learning pipeline designed to extract subcutaneous vascular structures from standard RGB imagery. By bypassing expensive Near-Infrared (NIR) hardware and computationally heavy classical filters, this project enables real-time vein detection for autonomous robotic venipuncture using ubiquitous optical sensors (like smartphones).
+### Overview
+Securing a successful first-attempt IV insertion is a widespread clinical challenge. While commercial vein-finding devices solve this using expensive Near-Infrared (NIR) or hyperspectral hardware, **Vein Hunter** is designed to democratize the process. This pipeline extracts complex vascular networks directly from visible-light images captured by ubiquitous optical sensors (such as standard webcams or smartphones).
+
+By combining lightweight classical computer vision preprocessing with an attention-guided neural core (CBAM U-Net), this project successfully bypasses computationally heavy multiscale filters (like Frangi). The result is high-accuracy, ultra-low latency vein detection capable of serving as the Initial Spatial Acquisition System for **autonomous robotic venipuncture**.
 
 -----
 
@@ -39,15 +42,19 @@ The model uses a **U-Net** backbone enhanced with **CBAM** (Channel and Spatial 
 
 ## Getting Started
 
-### 1\. Installation
+### 1 Installation
 
 ```bash
 git clone https://github.com/pragatirokade/vein-hunter.git
 cd vein-hunter
-pip install -r requirements.txt
 ```
 
-### 2\. Live Stream Setup (Mobile)
+### 2. Install Dependencies
+```bash
+pip install torch torchvision opencv-python numpy pillow matplotlib albumentations
+```
+
+### 3 Live Stream Setup (Mobile)
 
 1.  Install **IP Camera Lite** on your iPhone/Android.
 2.  Start the server and note the IPv4 address (e.g., `http://172.x.x.x:8081`).
@@ -55,14 +62,21 @@ pip install -r requirements.txt
     ```python
     url = "http://admin:admin@your_ip_address:8081/video"
     ```
+---
 
-### 3\. Run Inference
+## Usage
 
+### Real-Time Video Inference
 ```bash
 python live_vein_hunter.py
 ```
 
------
+### Static Image Analysis
+```bash
+python test_image.py --input path/to/arm_image.jpg
+```
+
+---
 
 ## Results
 
